@@ -1,0 +1,197 @@
+---
+import CarreraLayout from '@layouts/CarreraLayout.astro'
+import PlanEstudiosTimeline from '@components/PlanEstudiosTimeline.astro'
+import negociosImg from '/public/images/utparras/utp_banner.jpg'
+
+const planEstudios = [
+    {
+        numero: 1,
+        titulo: "Primer Cuatrimestre",
+        materias: ["Inglés I", "Mercadotecnia", "Matemáticas", "Fundamentos de Administración", "Desarrollo Humano"],
+        tipo: "tsu"
+    },
+    {
+        numero: 2,
+        titulo: "Segundo Cuatrimestre", 
+        materias: ["Inglés II", "Investigación de Mercados", "Álgebra Lineal", "Contabilidad", "Comportamiento del Consumidor"],
+        tipo: "tsu"
+    },
+    {
+        numero: 3,
+        titulo: "Tercer Cuatrimestre",
+        materias: ["Inglés III", "Estrategias de Producto", "Probabilidad y Estadística", "Administración Financiera", "Publicidad"],
+        tipo: "tsu"
+    },
+    {
+        numero: 4,
+        titulo: "Cuarto Cuatrimestre",
+        materias: ["Inglés IV", "Estrategias de Precio", "Estadística Aplicada", "Gestión de Ventas", "Comunicación Integral"],
+        tipo: "tsu"
+    },
+    {
+        numero: 5,
+        titulo: "Quinto Cuatrimestre",
+        materias: ["Inglés V", "Canales de Distribución", "Investigación de Operaciones", "Mercadotecnia Digital", "Negociación Comercial"],
+        tipo: "tsu"
+    },
+    {
+        numero: 6,
+        titulo: "Sexto Cuatrimestre",
+        materias: ["Inglés VI", "Proyecto Integrador I", "Inteligencia de Mercados", "E-commerce", "Emprendimiento"],
+        destacado: true,
+        tipo: "tsu"
+    },
+    {
+        numero: 7,
+        titulo: "Séptimo Cuatrimestre",
+        materias: ["Estadía Empresarial I"],
+        tipo: "estadias"
+    },
+    {
+        numero: 8,
+        titulo: "Octavo Cuatrimestre",
+        materias: ["Inglés VII", "Proyecto Integrador II", "Mercadotecnia Internacional", "Gestión de Proyectos", "Responsabilidad Social"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 9,
+        titulo: "Noveno Cuatrimestre",
+        materias: ["Inglés VIII", "Proyecto Integrador III", "Consultoría de Negocios", "Innovación Empresarial", "Economía Social"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 10,
+        titulo: "Décimo Cuatrimestre",
+        materias: ["Estadía Empresarial II"],
+        destacado: true,
+        tipo: "estadias"
+    }
+]
+---
+
+<CarreraLayout
+    title="Licenciatura en Negocios y Mercadotecnia"
+    descripcion="Forma profesionistas capacitados para gestionar el proceso de comercialización de productos y/o servicios a partir del diagnóstico de mercado."
+    objetivo="Formar profesionistas capacitados para gestionar el proceso de comercialización de productos y/o servicios a partir del diagnóstico de mercado."
+    perfilIngreso={[
+        "Habilidades de comunicación",
+        "Interés en negocios y mercadotecnia",
+        "Creatividad e innovación",
+        "Visión empresarial",
+        "Capacidad analítica"
+    ]}
+    perfilEgreso="Un profesionista que puede diagnosticar necesidades de mercado, evaluar unidades de negocios con modelos estratégicos, fortalecer la economía social y solidaria, y contribuir a la consolidación y rentabilidad de organizaciones."
+    campoLaboral={[
+        "Consultoría de negocios",
+        "Desarrollo comercial",
+        "Marketing digital",
+        "Gestión de ventas",
+        "Inteligencia de mercados",
+        "Gestión de proyectos",
+        "Emprendimiento",
+        "E-commerce"
+    ]}
+    duracion="10 cuatrimestres (3 años 8 meses)"
+    tituloTSU="Técnico Superior Universitario en Comercialización"
+    tituloFinal="Licenciatura en Negocios y Mercadotecnia"
+    icono="/images/utparras/utp_icon_lnm.png"
+    heroImage={negociosImg}
+    heroAlt="Estudiantes de Negocios y Mercadotecnia - Universidad Tecnológica de Parras"
+    carrera="negocios"
+>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
+            <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-200 mb-4">
+                Competencias Clave
+            </h3>
+            <ul class="space-y-2">
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Investigación de mercados</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Estrategias de producto y precio</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Mercadotecnia internacional</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Gestión de ventas</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Inteligencia de mercados</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Marketing digital</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700">
+            <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-200 mb-4">
+                Primer Cuatrimestre
+            </h3>
+            <ul class="space-y-2">
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Inglés I</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Mercadotecnia</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Matemáticas</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Fundamentos de Administración</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                    <span class="text-neutral-600 dark:text-neutral-400">Desarrollo Humano</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-6 bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6">
+        <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-200 mb-3">
+            Habilidades Desarrolladas
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg">
+                <svg class="w-8 h-8 text-primary-500 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <p class="font-semibold text-sm">Análisis de Mercado</p>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg">
+                <svg class="w-8 h-8 text-primary-500 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <p class="font-semibold text-sm">Marketing Digital</p>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg">
+                <svg class="w-8 h-8 text-primary-500 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <p class="font-semibold text-sm">Gestión de Ventas</p>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg">
+                <svg class="w-8 h-8 text-primary-500 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                <p class="font-semibold text-sm">Emprendimiento</p>
+            </div>
+        </div>
+    </div>
+
+    <PlanEstudiosTimeline planEstudios={planEstudios} />
+</CarreraLayout>

@@ -1,0 +1,214 @@
+---
+import CarreraLayout from '@layouts/CarreraLayout.astro'
+import PlanEstudiosTimeline from '@components/PlanEstudiosTimeline.astro'
+import tiImg from '/public/images/utparras/utp_banner.jpg'
+
+const planEstudios = [
+    {
+        numero: 1,
+        titulo: "Primer Cuatrimestre",
+        materias: [
+            "Inglés I", 
+            "Desarrollo Humano y Valores", 
+            "Fundamentos Matemáticos",
+            {
+                nombre: "Fundamentos de Programación",
+                creditos: 6,
+                descripcion: "Introducción a los conceptos básicos de programación utilizando diferentes paradigmas y lenguajes.",
+                competencias: [
+                    "Aplicar algoritmos básicos para la solución de problemas",
+                    "Utilizar estructuras de datos fundamentales",
+                    "Implementar programas usando buenas prácticas de codificación"
+                ]
+            },
+            {
+                nombre: "Fundamentos de TI",
+                creditos: 5,
+                descripcion: "Conceptos fundamentales de las tecnologías de información, hardware, software y redes.",
+                competencias: [
+                    "Identificar componentes de sistemas computacionales",
+                    "Comprender arquitecturas de hardware y software",
+                    "Aplicar conceptos básicos de redes de computadoras"
+                ]
+            }
+        ],
+        tipo: "tsu"
+    },
+    {
+        numero: 2,
+        titulo: "Segundo Cuatrimestre", 
+        materias: [
+            "Inglés II", 
+            "Física", 
+            "Álgebra Lineal",
+            {
+                nombre: "Programación Estructurada",
+                creditos: 6,
+                descripcion: "Desarrollo de habilidades en programación estructurada utilizando lenguajes como C y Python.",
+                prerequisitos: ["Fundamentos de Programación"],
+                competencias: [
+                    "Desarrollar programas utilizando estructuras de control",
+                    "Implementar funciones y procedimientos",
+                    "Manejar archivos y estructuras de datos complejas"
+                ]
+            },
+            {
+                nombre: "Bases de Datos",
+                creditos: 5,
+                descripcion: "Diseño, implementación y administración de bases de datos relacionales.",
+                competencias: [
+                    "Diseñar modelos de datos relacionales",
+                    "Implementar consultas SQL complejas",
+                    "Administrar sistemas de gestión de bases de datos"
+                ]
+            }
+        ],
+        tipo: "tsu"
+    },
+    {
+        numero: 3,
+        titulo: "Tercer Cuatrimestre",
+        materias: [
+            "Inglés III", 
+            "Probabilidad y Estadística", 
+            "Cálculo Diferencial",
+            {
+                nombre: "Programación Orientada a Objetos",
+                creditos: 6,
+                descripcion: "Desarrollo de software utilizando paradigmas de programación orientada a objetos con Java y C#.",
+                prerequisitos: ["Programación Estructurada"],
+                competencias: [
+                    "Aplicar conceptos de encapsulación, herencia y polimorfismo",
+                    "Diseñar aplicaciones usando patrones de diseño",
+                    "Desarrollar interfaces gráficas de usuario"
+                ]
+            },
+            {
+                nombre: "Redes de Computadoras",
+                creditos: 5,
+                descripcion: "Fundamentos de redes de computadoras, protocolos de comunicación y arquitecturas de red.",
+                prerequisitos: ["Fundamentos de TI"],
+                competencias: [
+                    "Configurar redes locales y de área amplia",
+                    "Implementar protocolos de comunicación",
+                    "Diagnosticar y resolver problemas de conectividad"
+                ]
+            }
+        ],
+        tipo: "tsu"
+    },
+    {
+        numero: 4,
+        titulo: "Cuarto Cuatrimestre",
+        materias: ["Inglés IV", "Matemáticas Discretas", "Cálculo Integral", "Aplicaciones Web", "Administración de Bases de Datos"],
+        tipo: "tsu"
+    },
+    {
+        numero: 5,
+        titulo: "Quinto Cuatrimestre",
+        materias: ["Inglés V", "Investigación de Operaciones", "Ecuaciones Diferenciales", "Realidad Aumentada y Virtual", "Seguridad Informática"],
+        tipo: "tsu"
+    },
+    {
+        numero: 6,
+        titulo: "Sexto Cuatrimestre",
+        materias: [
+            "Inglés VI",
+            {
+                nombre: "Proyecto Integrador I",
+                creditos: 8,
+                descripcion: "Desarrollo de un proyecto integral que demuestre las competencias adquiridas durante la formación TSU.",
+                prerequisitos: ["Programación Orientada a Objetos", "Bases de Datos", "Aplicaciones Web"],
+                competencias: [
+                    "Integrar conocimientos de múltiples áreas para resolver problemas complejos",
+                    "Desarrollar proyectos de software completos",
+                    "Aplicar metodologías de desarrollo de software",
+                    "Documentar y presentar soluciones tecnológicas"
+                ]
+            },
+            {
+                nombre: "Inteligencia Artificial",
+                creditos: 6,
+                descripcion: "Fundamentos de inteligencia artificial, machine learning y sus aplicaciones en el desarrollo de software.",
+                competencias: [
+                    "Implementar algoritmos de aprendizaje automático",
+                    "Desarrollar aplicaciones con IA",
+                    "Analizar datos usando técnicas de machine learning"
+                ]
+            },
+            {
+                nombre: "Internet de las Cosas",
+                creditos: 5,
+                descripcion: "Desarrollo de sistemas IoT, sensores, actuadores y comunicación entre dispositivos.",
+                prerequisitos: ["Redes de Computadoras"],
+                competencias: [
+                    "Diseñar arquitecturas IoT",
+                    "Programar dispositivos embebidos",
+                    "Implementar comunicación entre dispositivos"
+                ]
+            },
+            "Negocios Digitales"
+        ],
+        destacado: true,
+        tipo: "tsu"
+    },
+    {
+        numero: 7,
+        titulo: "Séptimo Cuatrimestre",
+        materias: ["Estadía Empresarial I"],
+        tipo: "estadias"
+    },
+    {
+        numero: 8,
+        titulo: "Octavo Cuatrimestre",
+        materias: ["Inglés VII", "Proyecto Integrador II", "Ciencia de Datos", "Desarrollo Móvil", "Gestión de Proyectos TI"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 9,
+        titulo: "Noveno Cuatrimestre",
+        materias: ["Inglés VIII", "Proyecto Integrador III", "Machine Learning", "Innovación Digital", "Emprendimiento Tecnológico"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 10,
+        titulo: "Décimo Cuatrimestre",
+        materias: ["Estadía Empresarial II"],
+        destacado: true,
+        tipo: "estadias"
+    }
+]
+---
+
+<CarreraLayout
+    title="Ingeniería en Tecnologías de la Información e Innovación Digital"
+    descripcion="Forma profesionales capaces de implementar aplicaciones multiplataforma, incorporar herramientas de IA y desarrollar soluciones tecnológicas para optimizar procesos en diversos sectores."
+    objetivo="Formar profesionales capaces de implementar aplicaciones multiplataforma, incorporar herramientas de IA y desarrollar soluciones tecnológicas para optimizar procesos en diversos sectores."
+    perfilIngreso={[
+        "Habilidades lógico-matemáticas",
+        "Interés en tecnología y programación",
+        "Creatividad e innovación",
+        "Capacidad analítica",
+        "Pensamiento crítico"
+    ]}
+    perfilEgreso="El ingeniero será capaz de implementar aplicaciones multiplataforma, utilizar software especializado en diseño y entornos virtuales, incorporar herramientas de Inteligencia Artificial, contribuir a la comercialización de productos y desarrollar soluciones de integración tecnológica."
+    campoLaboral={[
+        "Desarrollo de software",
+        "Inteligencia Artificial",
+        "Ciencia de Datos",
+        "Desarrollo de aplicaciones móviles y web",
+        "Realidad virtual y aumentada",
+        "Internet de las Cosas (IoT)",
+        "Seguridad informática",
+        "Consultoría tecnológica"
+    ]}
+    duracion="10 cuatrimestres (3 años 8 meses)"
+    tituloTSU="Técnico Superior Universitario en Entornos Virtuales y Negocios Digitales"
+    tituloFinal="Ingeniería en Tecnologías de la Información e Innovación Digital"
+    icono="/images/utparras/utp_icon_itiid.png"
+    heroImage={tiImg}
+    heroAlt="Estudiantes de Tecnologías de la Información - Universidad Tecnológica de Parras"
+    carrera="ti"
+>
+    <PlanEstudiosTimeline planEstudios={planEstudios} />
+</CarreraLayout>

@@ -1,0 +1,233 @@
+---
+const { planEstudios } = Astro.props
+
+interface Materia {
+    nombre: string
+    creditos?: number
+    descripcion?: string
+    prerequisitos?: string[]
+    competencias?: string[]
+}
+
+interface Cuatrimestre {
+    numero: number
+    titulo: string
+    materias: (string | Materia)[]
+    destacado?: boolean
+    tipo?: 'tsu' | 'continuacion' | 'estadias'
+}
+
+interface Props {
+    planEstudios: Cuatrimestre[]
+}
+---
+
+<div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-8 text-center">
+        Plan de Estudios
+    </h2>
+    
+    <div class="relative">
+        <!-- Línea principal del timeline -->
+        <div class="absolute left-8 top-0 bottom-0 w-px bg-neutral-300 dark:bg-neutral-600"></div>
+        
+        {planEstudios.map((cuatrimestre, index) => (
+            <div class="relative mb-8 pl-20">
+                <!-- Indicador del cuatrimestre -->
+                <div class={`absolute left-4 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold
+                    ${cuatrimestre.tipo === 'tsu' ? 'bg-secondary-500' :
+                      cuatrimestre.tipo === 'continuacion' ? 'bg-primary-500' :
+                      cuatrimestre.tipo === 'estadias' ? 'bg-orange-500' :
+                      'bg-neutral-400'}`}>
+                    {cuatrimestre.numero}
+                </div>
+                
+                <!-- Contenido del cuatrimestre -->
+                <div class={`bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border-2 transition-all hover:shadow-md
+                    ${cuatrimestre.tipo === 'tsu' ? 'border-secondary-200 dark:border-secondary-700' :
+                      cuatrimestre.tipo === 'continuacion' ? 'border-primary-200 dark:border-primary-700' :
+                      cuatrimestre.tipo === 'estadias' ? 'border-orange-200 dark:border-orange-700' :
+                      'border-neutral-200 dark:border-neutral-700'}`}>
+                    
+                    <!-- Encabezado del cuatrimestre -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+                            {cuatrimestre.titulo}
+                        </h3>
+                        
+                        {cuatrimestre.tipo === 'tsu' && (
+                            <span class="bg-secondary-100 text-secondary-800 dark:bg-secondary-900 dark:text-secondary-300 px-3 py-1 rounded-full text-sm font-semibold">
+                                🎓 Titulación TSU
+                            </span>
+                        )}
+                        
+                        {cuatrimestre.tipo === 'continuacion' && cuatrimestre.numero === 10 && (
+                            <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 px-3 py-1 rounded-full text-sm font-semibold">
+                                🎓 Titulación Final
+                            </span>
+                        )}
+                        
+                        {cuatrimestre.tipo === 'estadias' && (
+                            <span class="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 px-3 py-1 rounded-full text-sm font-semibold">
+                                💼 Estadía
+                            </span>
+                        )}
+                    </div>
+                    
+                    <!-- Lista de materias -->
+                    {cuatrimestre.materias.length > 0 && (
+                        <div class="space-y-2">
+                            {cuatrimestre.materias.map((materia, materiaIndex) => {
+                                const materiaData = typeof materia === 'string' ? { nombre: materia } : materia;
+                                const hasDetails = typeof materia === 'object' && (materia.descripcion || materia.competencias || materia.prerequisitos);
+                                const uniqueId = `materia-${cuatrimestre.numero}-${materiaIndex}`;
+                                
+                                return (
+                                    <div class="border border-neutral-200 dark:border-neutral-600 rounded-lg overflow-hidden">
+                                        <!-- Header de la materia -->
+                                        <div class={`flex items-center justify-between p-3 cursor-pointer transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-700 ${hasDetails ? 'bg-neutral-50 dark:bg-neutral-800' : 'bg-white dark:bg-neutral-800'}`}
+                                             onclick={hasDetails ? `toggleMateria('${uniqueId}')` : undefined}>
+                                            <div class="flex items-center gap-3 flex-1">
+                                                <div class={`w-2 h-2 rounded-full flex-shrink-0
+                                                    ${cuatrimestre.tipo === 'tsu' ? 'bg-secondary-500' :
+                                                      cuatrimestre.tipo === 'continuacion' ? 'bg-primary-500' :
+                                                      cuatrimestre.tipo === 'estadias' ? 'bg-orange-500' :
+                                                      'bg-neutral-400'}`}></div>
+                                                <span class="text-neutral-800 dark:text-neutral-200 font-medium text-sm">
+                                                    {materiaData.nombre}
+                                                </span>
+                                                {materiaData.creditos && (
+                                                    <span class="text-xs bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded-full">
+                                                        {materiaData.creditos} créditos
+                                                    </span>
+                                                )}
+                                            </div>
+                                            
+                                            {hasDetails && (
+                                                <svg class={`w-4 h-4 text-neutral-500 transform transition-transform duration-200 chevron-${uniqueId}`} 
+                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            )}
+                                        </div>
+                                        
+                                        <!-- Contenido expandible -->
+                                        {hasDetails && (
+                                            <div id={uniqueId} class="hidden border-t border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800">
+                                                <div class="p-4 space-y-3">
+                                                    {materiaData.descripcion && (
+                                                        <div>
+                                                            <h4 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Descripción</h4>
+                                                            <p class="text-sm text-neutral-600 dark:text-neutral-400">{materiaData.descripcion}</p>
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {materiaData.competencias && materiaData.competencias.length > 0 && (
+                                                        <div>
+                                                            <h4 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Competencias a desarrollar</h4>
+                                                            <ul class="space-y-1">
+                                                                {materiaData.competencias.map((competencia) => (
+                                                                    <li class="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                                        <span class="text-green-500 mt-1">•</span>
+                                                                        <span>{competencia}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {materiaData.prerequisitos && materiaData.prerequisitos.length > 0 && (
+                                                        <div>
+                                                            <h4 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Prerrequisitos</h4>
+                                                            <div class="flex flex-wrap gap-2">
+                                                                {materiaData.prerequisitos.map((prereq) => (
+                                                                    <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs px-2 py-1 rounded">
+                                                                        {prereq}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                    
+                    <!-- Descripción especial para estadías -->
+                    {cuatrimestre.tipo === 'estadias' && (
+                        <div class="mt-4 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-orange-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-semibold text-orange-800 dark:text-orange-300 mb-1">
+                                        Experiencia Profesional
+                                    </p>
+                                    <p class="text-sm text-orange-700 dark:text-orange-400">
+                                        Práctica profesional en empresas del sector, aplicando conocimientos adquiridos en proyectos reales.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        ))}
+    </div>
+    
+    <!-- Información adicional -->
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="text-center p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl">
+            <svg class="w-12 h-12 text-primary-500 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="font-bold text-neutral-800 dark:text-neutral-200 mb-2">Duración Total</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">10 Cuatrimestres</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-500">3 años 8 meses</p>
+        </div>
+        
+        <div class="text-center p-6 bg-secondary-50 dark:bg-secondary-900/20 rounded-xl">
+            <svg class="w-12 h-12 text-secondary-500 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+            <h3 class="font-bold text-neutral-800 dark:text-neutral-200 mb-2">Doble Titulación</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">TSU + Licenciatura/Ingeniería</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-500">Dos títulos oficiales</p>
+        </div>
+        
+        <div class="text-center p-6 bg-orange-50 dark:bg-orange-900/20 rounded-xl">
+            <svg class="w-12 h-12 text-orange-500 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <h3 class="font-bold text-neutral-800 dark:text-neutral-200 mb-2">Experiencia Práctica</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">2 Estadías Empresariales</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-500">Trabajo real en empresas</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleMateria(id) {
+        const element = document.getElementById(id);
+        const chevron = document.querySelector(`.chevron-${id}`);
+        
+        if (element && chevron) {
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                element.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+    }
+    
+    // Hacer la función disponible globalmente
+    window.toggleMateria = toggleMateria;
+</script>

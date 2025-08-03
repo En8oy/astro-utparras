@@ -1,0 +1,38 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro'
+import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro'
+import { SITE } from '@/config'
+
+const pageTitle: string = `Página no encontrada | ${SITE.title}`
+---
+
+<BaseLayout title={pageTitle}>
+    <section class="grid h-svh place-content-center">
+        <div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
+            <div class="mx-auto max-w-screen-sm text-center">
+                <div class="mb-8">
+                    <img src="/images/utparras/utp_logo.png" alt="UT Parras" class="mx-auto h-24 w-auto opacity-50" />
+                </div>
+                <h1 class="mb-4 text-7xl font-extrabold text-primary-500 dark:text-primary-400 lg:text-9xl">
+                    404
+                </h1>
+                <p class="mb-4 text-balance text-3xl font-bold tracking-tight text-neutral-700 dark:text-neutral-300 md:text-4xl">
+                    ¡Ups! Página no encontrada
+                </p>
+                <p class="mb-8 text-lg text-neutral-600 dark:text-neutral-400">
+                    Lo sentimos, no pudimos encontrar la página que estás buscando. 
+                    <br />Puede que haya sido movida o eliminada.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <PrimaryCTA title="Volver al Inicio" url="/" />
+                    <SecondaryCTA title="Contactar Soporte" url="/contacto" />
+                </div>
+                <div class="mt-12 text-sm text-neutral-500 dark:text-neutral-400">
+                    <p>¿Necesitas ayuda? Llámanos:</p>
+                    <p class="font-semibold text-primary-600 dark:text-primary-400">842 422 3313</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

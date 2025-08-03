@@ -1,0 +1,205 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import MainSection from '@components/ui/sections/MainSection.astro'
+import CarreraIcon from '@components/CarreraIcon.astro'
+import { SITE } from '@/config'
+
+const description = `Programas educativos de la Universidad Tecnológica de Parras. Ofrecemos carreras de ingeniería y licenciatura de alta calidad.`
+const URL = Astro.url.href
+
+const layoutPattern = [
+    { col: 2, row: 2 },  // TI - Grande
+    { col: 2, row: 1 },  // Agricultura - Horizontal
+    { col: 2, row: 1 },  // Industrial - Horizontal
+    { col: 1, row: 2 },  // Negocios - Vertical
+    { col: 1, row: 1 },  // Turismo - Pequeña
+]
+
+const carrerasData = [
+    {
+        id: 'ti',
+        nombre: 'Tecnologías de la Información',
+        titulo: 'Ingeniería en Tecnologías de la Información e Innovación Digital',
+        abreviatura: 'ITIID',
+        descripcion: 'Desarrolla profesionales especializados en soluciones tecnológicas, inteligencia artificial y transformación digital.',
+        duracion: '3 años 8 meses',
+        modalidad: 'Escolarizada',
+        icono: '/images/utparras/utp_icon_itiid.png',
+        color: 'blue',
+        url: '/carreras/ti',
+        bgGradient: '',
+        textColor: 'text-blue-600 dark:text-blue-400'
+    },
+    {
+        id: 'agricultura',
+        nombre: 'Agricultura Sustentable',
+        titulo: 'Ingeniería en Agricultura Sustentable y Protegida',
+        abreviatura: 'IASP',
+        descripcion: 'Forma profesionales capaces de implementar tecnologías innovadoras en la producción agrícola sustentable y protegida.',
+        duracion: '3 años 8 meses',
+        modalidad: 'Escolarizada',
+        icono: '/images/utparras/utp_icon_iasp.png',
+        color: 'red',
+        url: '/carreras/agricultura',
+        bgGradient: '',
+        textColor: 'text-red-800 dark:text-red-400'
+    },
+    {
+        id: 'industrial',
+        nombre: 'Ingeniería Industrial',
+        titulo: 'Ingeniería Industrial',
+        abreviatura: 'II',
+        descripcion: 'Forma ingenieros capaces de optimizar procesos productivos y mejorar la eficiencia organizacional.',
+        duracion: '3 años 8 meses',
+        modalidad: 'Escolarizada',
+        icono: '/images/utparras/utp_icon_ii.png',
+        color: 'gray',
+        url: '/carreras/industrial',
+        bgGradient: '',
+        textColor: 'text-gray-700 dark:text-gray-400'
+    },
+    {
+        id: 'negocios',
+        nombre: 'Negocios y Mercadotecnia',
+        titulo: 'Licenciatura en Negocios y Mercadotecnia',
+        abreviatura: 'LNM',
+        descripcion: 'Prepara profesionales en estrategias de negocio, marketing digital y gestión empresarial moderna.',
+        duracion: '3 años 8 meses',
+        modalidad: 'Escolarizada',
+        icono: '/images/utparras/utp_icon_lnm.png',
+        color: 'red',
+        url: '/carreras/negocios',
+        bgGradient: '',
+        textColor: 'text-red-600 dark:text-red-400'
+    },
+    {
+        id: 'turismo',
+        nombre: 'Gestión Turística',
+        titulo: 'Licenciatura en Gestión y Desarrollo Turístico',
+        abreviatura: 'LGDT',
+        descripcion: 'Forma expertos en la industria turística con enfoque en desarrollo sustentable y gestión de destinos.',
+        duracion: '3 años 8 meses',
+        modalidad: 'Escolarizada',
+        icono: '/images/utparras/utp_icon_lgdt.png',
+        color: 'purple',
+        url: '/carreras/turismo',
+        bgGradient: '',
+        textColor: 'text-purple-700 dark:text-purple-400'
+    }
+]
+
+const carreras = carrerasData.map((carrera, index) => {
+    const pattern = layoutPattern[index % layoutPattern.length]
+    const smColSpan = Math.min(pattern.col, 2)
+    const mdColSpan = Math.min(pattern.col, 3)
+    const rowSpan = pattern.row
+    const rowSpanClass = rowSpan > 1 ? `row-span-${rowSpan}` : 'row-span-1'
+    const gridItemClass = `col-span-${smColSpan} md:col-span-${mdColSpan} ${rowSpanClass}`
+    
+    return {
+        ...carrera,
+        gridItemClass,
+        layoutPattern: {
+            smCol: smColSpan,
+            mdCol: mdColSpan,
+            row: rowSpan,
+            index,
+        },
+    }
+})
+---
+
+<BaseLayout
+    title="Carreras"
+    description={description}
+    structuredData={{
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        'inLanguage': 'es-MX',
+        '@id': URL,
+        'url': URL,
+        'name': `Carreras - ${SITE.title}`,
+        'description': description,
+        'isPartOf': {
+            '@type': 'WebSite',
+            'url': SITE.url,
+            'name': SITE.title,
+            'description': SITE.description,
+        },
+    }}
+>
+    <MainSection 
+        title="Programas Educativos" 
+        subTitle={`Ofrecemos ${carreras.length} carreras profesionales diseñadas para formar líderes en sus respectivas áreas.`} 
+    />
+
+    <section class="mx-auto px-4 py-10 sm:px-6 lg:px-8 lg:pt-10 lg:py-14 2xl:max-w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:grid-flow-row-dense">
+            {carreras.map((carrera, index) => {
+                // On mobile: all cards span full width
+                // On small screens: all cards span 1 column  
+                // On medium+: use original layout pattern
+                const mobileClass = 'col-span-1'
+                const smClass = 'sm:col-span-1'
+                const mdClass = `md:${carrera.gridItemClass}`
+                
+                return (
+                    <div
+                        class={`${mobileClass} ${smClass} ${mdClass}`}
+                        style={carrera.layoutPattern.row > 1 ? 'grid-row: span 2 / span 2;' : ''}
+                    >
+                        <a
+                            class="ring-zinc-500 dark:ring-zinc-200 dark:focus:outline-none"
+                            href={carrera.url}
+                            data-astro-prefetch="false"
+                        >
+                            <div class={`rounded-xl group shadow-md hover:shadow-lg hover:scale-105 overflow-hidden transition-all duration-300 cursor-pointer h-full flex flex-col min-h-[280px] sm:min-h-[250px] ${carrera.layoutPattern.row > 1 ? 'md:min-h-[350px]' : 'md:min-h-[250px]'} bg-white dark:bg-neutral-900/30 ${carrera.bgGradient}`}>
+                            <div class="overflow-hidden relative flex-grow min-h-0">
+                                <div class="absolute inset-1 p-3 md:p-4 lg:p-5 flex flex-col justify-end">
+                                    
+                                    <!-- Icono de la carrera -->
+                                    <div class="mb-4 md:mb-4 lg:mb-6">
+                                        <CarreraIcon 
+                                            carrera={carrera.id} 
+                                            size={carrera.layoutPattern.row > 1 ? "48px md:64px" : "48px"} 
+                                            trigger="loop" 
+                                        />
+                                    </div>
+                                    
+                                    <!-- Título -->
+                                    <h2 class={`mb-4 text-balance text-2xl sm:text-3xl font-bold ${carrera.layoutPattern.row > 1 ? 'md:text-4xl md:font-black' : 'md:text-3xl'} leading-tight text-neutral-800 dark:text-white group-hover:${carrera.textColor.split(' ')[0]} dark:group-hover:${carrera.textColor.split(' ')[1]}`}>
+                                        {carrera.nombre}
+                                    </h2>
+                                    
+                                    <!-- Descripción -->
+                                    <p class={`mb-4 max-w-prose text-pretty text-sm ${carrera.layoutPattern.row > 1 ? 'md:text-base md:font-normal' : 'md:text-sm md:font-light'} text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-500 dark:group-hover:text-neutral-300`}>
+                                        {carrera.descripcion}
+                                    </p>
+                                    
+                                    <!-- Footer con información -->
+                                    <div class="flex justify-between items-center text-xs text-neutral-600 dark:text-neutral-400 mt-auto pt-1 md:pt-2">
+                                        <span class="inline-flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="mr-1">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                            </svg>
+                                            {carrera.abreviatura}
+                                        </span>
+                                        <span class="inline-flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="mr-1">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 6 12 12 16 14"></polyline>
+                                            </svg>
+                                            {carrera.duracion}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                )
+            })}
+        </div>
+    </section>
+</BaseLayout>

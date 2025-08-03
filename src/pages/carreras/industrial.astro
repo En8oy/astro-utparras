@@ -1,0 +1,103 @@
+---
+import CarreraLayout from '@layouts/CarreraLayout.astro'
+import PlanEstudiosTimeline from '@components/PlanEstudiosTimeline.astro'
+import industrialImg from '/public/images/utparras/utp_imagen1.jpg'
+
+const planEstudios = [
+    {
+        numero: 1,
+        titulo: "Primer Cuatrimestre",
+        materias: ["Inglés I", "Desarrollo Humano y Valores", "Fundamentos Matemáticos", "Procesos Industriales", "Calidad y Productividad"],
+        tipo: "tsu"
+    },
+    {
+        numero: 2,
+        titulo: "Segundo Cuatrimestre", 
+        materias: ["Inglés II", "Física", "Álgebra Lineal", "Administración de Operaciones", "Control de Calidad"],
+        tipo: "tsu"
+    },
+    {
+        numero: 3,
+        titulo: "Tercer Cuatrimestre",
+        materias: ["Inglés III", "Probabilidad y Estadística", "Cálculo Diferencial", "Procesos de Fabricación", "Metrología"],
+        tipo: "tsu"
+    },
+    {
+        numero: 4,
+        titulo: "Cuarto Cuatrimestre",
+        materias: ["Inglés IV", "Estadística Aplicada", "Cálculo Integral", "Manufactura Esbelta", "Seguridad e Higiene"],
+        tipo: "tsu"
+    },
+    {
+        numero: 5,
+        titulo: "Quinto Cuatrimestre",
+        materias: ["Inglés V", "Investigación de Operaciones", "Ecuaciones Diferenciales", "Logística", "Sistemas de Gestión de Calidad"],
+        tipo: "tsu"
+    },
+    {
+        numero: 6,
+        titulo: "Sexto Cuatrimestre",
+        materias: ["Inglés VI", "Proyecto Integrador I", "Simulación de Procesos", "Administración de la Cadena de Suministro", "Desarrollo Sustentable"],
+        destacado: true,
+        tipo: "tsu"
+    },
+    {
+        numero: 7,
+        titulo: "Séptimo Cuatrimestre",
+        materias: ["Estadía Empresarial I"],
+        tipo: "estadias"
+    },
+    {
+        numero: 8,
+        titulo: "Octavo Cuatrimestre",
+        materias: ["Inglés VII", "Proyecto Integrador II", "Gestión de Proyectos", "Innovación y Desarrollo", "Ingeniería Económica"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 9,
+        titulo: "Noveno Cuatrimestre",
+        materias: ["Inglés VIII", "Proyecto Integrador III", "Optimización de Procesos", "Administración de la Producción", "Emprendimiento"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 10,
+        titulo: "Décimo Cuatrimestre",
+        materias: ["Estadía Empresarial II"],
+        destacado: true,
+        tipo: "estadias"
+    }
+]
+---
+
+<CarreraLayout
+    title="Ingeniería Industrial"
+    descripcion="Forma ingenieros capaces de incrementar la competitividad de las organizaciones, lograr la sostenibilidad y cumplir con requisitos de partes interesadas mediante la optimización de sistemas, procesos y proyectos industriales."
+    objetivo="Formar ingenieros capaces de incrementar la competitividad de las organizaciones, lograr la sostenibilidad y cumplir con requisitos de partes interesadas mediante la optimización de sistemas, procesos y proyectos industriales."
+    perfilIngreso={[
+        "Habilidades matemáticas y analíticas",
+        "Interés en procesos productivos",
+        "Capacidad de resolución de problemas",
+        "Visión sistémica",
+        "Liderazgo y trabajo en equipo"
+    ]}
+    perfilEgreso="Profesional capaz de desarrollar habilidades para optimizar sistemas, procesos y proyectos industriales, mediante la aplicación de metodologías y herramientas con enfoque sistémico, integral, humano y social."
+    campoLaboral={[
+        "Gestión de calidad",
+        "Optimización de procesos productivos",
+        "Cadena de suministros",
+        "Desarrollo e innovación industrial",
+        "Manufactura esbelta",
+        "Logística empresarial",
+        "Simulación de procesos",
+        "Gestión de proyectos"
+    ]}
+    duracion="10 cuatrimestres (3 años 8 meses)"
+    tituloTSU="Técnico Superior Universitario en Procesos Productivos"
+    tituloFinal="Ingeniería Industrial"
+    icono="/images/utparras/utp_icon_ii.png"
+    heroImage={industrialImg}
+    heroAlt="Estudiantes de Ingeniería Industrial - Universidad Tecnológica de Parras"
+    carrera="industrial"
+>
+    <PlanEstudiosTimeline planEstudios={planEstudios} />
+</CarreraLayout>

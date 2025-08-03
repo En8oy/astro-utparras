@@ -1,0 +1,80 @@
+---
+import { formatNewsDate } from '@/lib/news'
+
+interface Props {
+  title: string
+  slug: string
+  excerpt: string
+  featured_image?: string
+  author: string
+  published_at: string
+  category?: string
+}
+
+const { 
+  title, 
+  slug, 
+  excerpt, 
+  featured_image, 
+  author, 
+  published_at, 
+  category 
+} = Astro.props
+
+const formattedDate = formatNewsDate(published_at)
+const defaultImage = '/images/utparras/utp_banner.jpg'
+---
+
+<section class="relative h-96 overflow-hidden rounded-xl">
+  <img 
+    src={featured_image || defaultImage} 
+    alt={title}
+    class="w-full h-full object-cover"
+  />
+  
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+  
+  <div class="absolute bottom-0 left-0 right-0 p-8">
+    <div class="max-w-4xl">
+      {category && (
+        <span class="inline-block bg-primary-500 text-white px-3 py-1 rounded-md text-sm font-medium mb-4">
+          {category}
+        </span>
+      )}
+      
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+        {title}
+      </h1>
+      
+      <p class="text-lg text-neutral-200 mb-4 max-w-2xl">
+        {excerpt}
+      </p>
+      
+      <div class="flex items-center gap-4 text-sm text-neutral-300">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <time datetime={published_at}>{formattedDate}</time>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          <span>{author}</span>
+        </div>
+        
+        <a 
+          href={`/noticias/${slug}`}
+          class="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md transition-colors ml-auto"
+        >
+          <span>Leer artículo completo</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

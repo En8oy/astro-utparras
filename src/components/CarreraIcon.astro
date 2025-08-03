@@ -1,0 +1,43 @@
+---
+interface Props {
+    carrera: string
+    size?: string
+    trigger?: string
+}
+
+const { carrera, size = "32px", trigger = "hover" } = Astro.props
+
+const iconMap = {
+    "agricultura": {
+        src: "https://cdn.lordicon.com/kkosvsms.json",
+        colors: "primary:#9b2b2c,secondary:#c53030"
+    },
+    "ti": {
+        src: "https://cdn.lordicon.com/byicyhmi.json", 
+        colors: "primary:#0083FF,secondary:#3b82f6"
+    },
+    "industrial": {
+        src: "https://cdn.lordicon.com/cgolfevh.json",
+        colors: "primary:#444A50,secondary:#6b7280"
+    },
+    "negocios": {
+        src: "https://cdn.lordicon.com/xowcggal.json",
+        colors: "primary:#F60805,secondary:#dc2626"
+    },
+    "turismo": {
+        src: "https://cdn.lordicon.com/xmoniccu.json",
+        colors: "primary:#5B0672,secondary:#7c3aed"
+    }
+}
+
+const icon = iconMap[carrera as keyof typeof iconMap]
+---
+
+{icon && (
+    <lord-icon
+        src={icon.src}
+        trigger={trigger}
+        colors={icon.colors}
+        style={`width:${size};height:${size}`}>
+    </lord-icon>
+)}

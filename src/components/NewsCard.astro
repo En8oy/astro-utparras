@@ -1,0 +1,83 @@
+---
+import { formatNewsDate } from '@/lib/news'
+
+interface Props {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  featured_image?: string
+  author: string
+  published_at: string
+  category?: string
+  featured?: boolean
+}
+
+const { 
+  id, 
+  title, 
+  slug, 
+  excerpt, 
+  featured_image, 
+  author, 
+  published_at, 
+  category,
+  featured = false 
+} = Astro.props
+
+const formattedDate = formatNewsDate(published_at)
+const defaultImage = '/images/utparras/utp_banner.jpg'
+---
+
+<article class={`group cursor-pointer rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 overflow-hidden hover:shadow-lg hover:scale-105 transition-all duration-300 ${featured ? 'md:col-span-2' : ''}`}>
+  <a href={`/noticias/${slug}`} class="block">
+    <div class="relative">
+      <img 
+        src={featured_image || defaultImage} 
+        alt={title}
+        class={`w-full object-cover ${featured ? 'h-64' : 'h-48'}`}
+        loading="lazy"
+      />
+      {category && (
+        <span class="absolute top-3 left-3 bg-primary-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+          {category}
+        </span>
+      )}
+    </div>
+    
+    <div class="p-6">
+      <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <time datetime={published_at}>{formattedDate}</time>
+        <span>•</span>
+        <span>{author}</span>
+      </div>
+      
+      <h3 class={`font-bold text-neutral-800 dark:text-neutral-200 mb-3 group-hover:text-primary-500 transition-colors ${featured ? 'text-xl' : 'text-lg'}`}>
+        {title}
+      </h3>
+      
+      <p class={`text-neutral-600 dark:text-neutral-400 line-clamp-3 ${featured ? 'text-base' : 'text-sm'}`}>
+        {excerpt}
+      </p>
+      
+      <div class="flex items-center gap-2 mt-4 text-primary-500 text-sm font-medium group-hover:gap-3 transition-all">
+        <span>Leer más</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

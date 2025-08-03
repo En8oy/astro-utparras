@@ -1,0 +1,103 @@
+---
+import CarreraLayout from '@layouts/CarreraLayout.astro'
+import PlanEstudiosTimeline from '@components/PlanEstudiosTimeline.astro'
+import agriculturaImg from '/public/images/utparras/utp_imagen1.jpg'
+
+const planEstudios = [
+    {
+        numero: 1,
+        titulo: "Primer Cuatrimestre",
+        materias: ["Inglés I", "Desarrollo Humano y Valores", "Fundamentos Matemáticos", "Botánica", "Sustentabilidad Agrícola"],
+        tipo: "tsu"
+    },
+    {
+        numero: 2,
+        titulo: "Segundo Cuatrimestre", 
+        materias: ["Inglés II", "Biología", "Álgebra Lineal", "Química", "Edafología"],
+        tipo: "tsu"
+    },
+    {
+        numero: 3,
+        titulo: "Tercer Cuatrimestre",
+        materias: ["Inglés III", "Fisiología Vegetal", "Probabilidad y Estadística", "Bioquímica", "Topografía"],
+        tipo: "tsu"
+    },
+    {
+        numero: 4,
+        titulo: "Cuarto Cuatrimestre",
+        materias: ["Inglés IV", "Agrónica", "Cálculo Diferencial", "Entomología", "Riego y Drenaje"],
+        tipo: "tsu"
+    },
+    {
+        numero: 5,
+        titulo: "Quinto Cuatrimestre",
+        materias: ["Inglés V", "Fitopatología", "Cálculo Integral", "Sistemas de Producción", "Manejo Integrado de Plagas"],
+        tipo: "tsu"
+    },
+    {
+        numero: 6,
+        titulo: "Sexto Cuatrimestre",
+        materias: ["Inglés VI", "Diseño de Sistemas Agrícolas", "Proyecto Integrador I", "Nutrición Vegetal", "Agricultura Protegida"],
+        destacado: true,
+        tipo: "tsu"
+    },
+    {
+        numero: 7,
+        titulo: "Séptimo Cuatrimestre",
+        materias: ["Estadía Empresarial I"],
+        tipo: "estadias"
+    },
+    {
+        numero: 8,
+        titulo: "Octavo Cuatrimestre",
+        materias: ["Inglés VII", "Transferencia de Tecnología", "Proyecto Integrador II", "Vitivinicultura", "Mecanización Agrícola"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 9,
+        titulo: "Noveno Cuatrimestre",
+        materias: ["Inglés VIII", "Agronegocios", "Administración de Proyectos", "Mercadotecnia Agrícola", "Innovación Tecnológica"],
+        tipo: "continuacion"
+    },
+    {
+        numero: 10,
+        titulo: "Décimo Cuatrimestre",
+        materias: ["Estadía Empresarial II"],
+        destacado: true,
+        tipo: "estadias"
+    }
+]
+---
+
+<CarreraLayout
+    title="Ingeniería en Agricultura Sustentable y Protegida"
+    descripcion="Forma profesionales especializados en sistemas de producción agrícola sustentable con énfasis en agricultura protegida y tecnologías innovadoras."
+    objetivo="Formar profesionales especializados en sistemas de producción agrícola sustentable con énfasis en agricultura protegida y tecnologías innovadoras."
+    perfilIngreso={[
+        "Interés en ciencias agrícolas y sustentabilidad",
+        "Habilidades matemáticas y científicas básicas",
+        "Compromiso con el desarrollo sustentable",
+        "Capacidad de trabajo en campo",
+        "Visión emprendedora"
+    ]}
+    perfilEgreso="Profesional capaz de evaluar sistemas de producción de agricultura protegida a través de métodos y técnicas de manejo agronómico sustentable, tecnologías innovadoras de producción, técnicas y herramientas administrativas para proponer paquetes tecnológicos y potencializar el sector agrícola."
+    campoLaboral={[
+        "Gestión de sistemas agrícolas protegidos",
+        "Consultoría en agricultura sustentable",
+        "Desarrollo de proyectos agrícolas",
+        "Innovación en tecnologías agrícolas",
+        "Agronegocios",
+        "Sector vitivinícola",
+        "Investigación agrícola",
+        "Transferencia de tecnología"
+    ]}
+    duracion="10 cuatrimestres (3 años 8 meses)"
+    tituloTSU="Técnico Superior Universitario en Agricultura Sustentable y Protegida en Vitivinicultura"
+    tituloFinal="Ingeniería en Agricultura Sustentable y Protegida"
+    icono="/images/utparras/utp_icon_iasp.png"
+    heroImage={agriculturaImg}
+    heroAlt="Estudiantes de Agricultura Sustentable y Protegida - Universidad Tecnológica de Parras"
+    carrera="agricultura"
+>
+    <PlanEstudiosTimeline planEstudios={planEstudios} />
+</CarreraLayout>
